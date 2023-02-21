@@ -5,7 +5,7 @@ import bug_error from "./bug_error.svg";
 const ErrorPage = () => {
   return (
     <ContentContainer>
-      <img src={bug_error} style={{ height: "60%", width: "60%" }} />
+      <img src={bug_error} alt="error occured" style={{ height: "60%", width: "60%" }} />
       <h2>Something went wrong.</h2>
       <NavLink to="/">
         <button>Go back to home page</button>

@@ -1,9 +1,9 @@
 import { lazy, Suspense } from "react";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
-import ReactLoading from "react-loading";
 import { AppContainer, AppHeader } from "./styles";
 import { GlobalStyles, theme } from "common/styles/globalStyles";
+import Loading from "common/components/Loading";
 import ErrorBoundary from "common/components/ErrorBoundary";
 import ErrorPage from "common/components/ErrorPage";
 import { routes } from "common/config";
@@ -24,16 +24,7 @@ function App() {
           </AppHeader>
           <Navigation />
           <ErrorBoundary fallback={<ErrorPage />}>
-            <Suspense
-              fallback={
-                <ReactLoading
-                  type="spin"
-                  color={theme.colors.primary}
-                  height={"20%"}
-                  width={"20%"}
-                />
-              }
-            >
+            <Suspense fallback={<Loading />}>
               <Routes>
                 <Route path={routes.HOME} element={<MovieSearch />} />
                 <Route path={routes.SEARCH} element={<MovieSearch />} />

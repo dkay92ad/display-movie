@@ -6,13 +6,15 @@ export const AppContainer = styled.div`
   align-items: center;
   justify-content: start;
   max-width: 100%;
-  width: 330px;
+  min-width: 320px;
+  width: 100%;
   height: 100vh;
   background: ${(props) => props.theme.colors.lightPrimary};
   margin: auto;
   overflow-y: scroll;
   @media (min-width: 600px) {
     width: 100%;
+    align-items: start;
   }
 `;
 

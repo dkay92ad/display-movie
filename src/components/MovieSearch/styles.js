@@ -5,7 +5,7 @@ export const MovieSearchContainer = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 100%;
-  width: 330px;
+  width: 100%;
   @media(min-width: 600px){
     width: 100%
   }

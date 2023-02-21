@@ -10,13 +10,13 @@ export const SearchContainer = styled.div`
   margin-bottom: 1rem;
   background: ${(props) => props.theme.colors.primary};
   border: none;
+  color: ${(props) => props.theme.colors.white};
   form {
     display: flex;
     justify-content: space-between;
     width: 90%;
     label {
       line-height: 2.5rem;
-      color: ${(props) => props.theme.colors.white};
     }
     input {
       padding: 0.5rem;

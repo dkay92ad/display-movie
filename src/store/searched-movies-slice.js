@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
+  searchedTitle: "",
+  isFullPlot: true,
   movies: [],
   isLoading: false,
   error: "",
@@ -14,6 +16,12 @@ export const searchedMoviesSlice = createSlice({
     setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    setSearchedTitle: (state, action) => {
+      state.searchedTitle = action.payload;
+    },
+    setIsFullPlot: (state, action) => {
+      state.isFullPlot = action.payload;
+    },
     setError: (state, action) => {
       state.error = action.payload;
     },
@@ -23,7 +31,7 @@ export const searchedMoviesSlice = createSlice({
   },
 });
 
-export const getMovies = (title) => {
+export const getMovies = (title, isFullPlot) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     const fetchData = async () => {
@@ -39,7 +47,7 @@ export const getMovies = (title) => {
       const { Search: movieTitles } = await fetchData();
       if (movieTitles.length) {
         movieTitles.slice(0, 5).forEach(({ imdbID }) => {
-          dispatch(getMovieData(imdbID));
+          dispatch(getMovieData(imdbID, isFullPlot));
         });
       }
       dispatch(setLoading(false));
@@ -50,12 +58,14 @@ export const getMovies = (title) => {
   };
 };
 
-export const getMovieData = (id) => {
+export const getMovieData = (id, isFullPlot) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     const fetchData = async () => {
       const resp = await fetch(
-        `http://www.omdbapi.com/?i=${id}&apiKey=6c3a2d45`
+        `http://www.omdbapi.com/?i=${id}${
+          isFullPlot ? "&plot=full" : ""
+        }&apiKey=6c3a2d45`
       );
       const data = await resp.json();
       if (!resp.ok) throw new Error("Something went wrong during API call!");
@@ -74,8 +84,14 @@ export const getMovieData = (id) => {
 };
 
 // this is for dispatch
-export const { addSearchedMovies, resetSearchedMovies, setLoading, setError } =
-  searchedMoviesSlice.actions;
+export const {
+  addSearchedMovies,
+  resetSearchedMovies,
+  setLoading,
+  setError,
+  setIsFullPlot,
+  setSearchedTitle,
+} = searchedMoviesSlice.actions;
 
 // this is for configureStore
 export default searchedMoviesSlice.reducer;

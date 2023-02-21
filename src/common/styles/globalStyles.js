@@ -61,5 +61,6 @@ export const theme = {
     error: "red",
     warning: "amber",
     golden: "#cbc00c",
+    blue: "blue",
   },
 };

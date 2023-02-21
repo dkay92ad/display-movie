@@ -1,23 +1,28 @@
-import React, { useCallback, useState, useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { getMovies, resetSearchedMovies } from "../../store/searched-movies-slice";
+import {
+  getMovies,
+  resetSearchedMovies,
+  setSearchedTitle,
+} from "../../store/searched-movies-slice";
 import Search from "./Search";
 import MovieTitles from "./MovieTitles";
 import { MovieSearchContainer } from "./styles";
 
 function MovieSearch() {
   const dispatch = useDispatch();
-  const [searchedInput, setSearchedInput] = useState("");
   const searchInputRef = useRef();
+  const searchCheckboxRef = useRef();
 
   const onChangeHandler = useCallback(
     (event) => {
       event.preventDefault();
       const title = searchInputRef.current.value;
+      const isFullPlot = searchCheckboxRef.current.checked;
       if (!title) return;
-      setSearchedInput(title);
+      dispatch(setSearchedTitle(title));
       dispatch(resetSearchedMovies());
-      dispatch(getMovies(title));
+      dispatch(getMovies(title, isFullPlot));
       searchInputRef.current.value = "";
     },
     [dispatch]
@@ -28,9 +33,10 @@ function MovieSearch() {
       <Search
         searchInputRef={searchInputRef}
         onChangeHandler={onChangeHandler}
+        searchCheckboxRef={searchCheckboxRef}
       />
 
-      <MovieTitles searchedTitle={searchedInput} />
+      <MovieTitles />
     </MovieSearchContainer>
   );
 }
