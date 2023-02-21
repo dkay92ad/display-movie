@@ -14,6 +14,8 @@ o Featured
 ![Search Page on iPhone 12 Pro](<public/screenshots/Search%20page%20(iPhone%2012%20Pro).png>)
 ![Featured Page on iPhone 12 Pro](<public/screenshots/Featured%20page(iPhone%2012%20Pro).png>)
 
+<img src="public/screenshots/Search%20page%20(iPhone%2012%20Pro).png"  width="390" height="844">
+
 ## Search Page
 
 Users can search for movies based on the title. This displays a list of movies, each displaying information about the corresponding movie:
