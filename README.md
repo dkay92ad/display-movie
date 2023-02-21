@@ -43,7 +43,7 @@ o Plot (full)
 
 ### Installation
 
-git clone https://github.com/johnuberbacher/invoice-generator
+git clone https://github.com/dkay92ad/display-movie.git
 
 npm install
 
