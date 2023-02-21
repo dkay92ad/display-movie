@@ -5,6 +5,9 @@ export const MovieDisplayContainer = styled(ContentContainer)`
   margin-bottom: 1rem;
   align-items: start;
   background: ${(props) => props.theme.colors.lightSecondary};
+  img {
+    width: 100%;
+  }
   @media (min-width: 600px) {
     width: 47%;
     flex-direction: row;

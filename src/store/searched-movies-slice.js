@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiKey, baseUrl } from "common/config";
+
 const initialState = {
   searchedTitle: "",
   isFullPlot: true,
@@ -36,7 +38,11 @@ export const getMovies = (title, isFullPlot) => {
     dispatch(setLoading(true));
     const fetchData = async () => {
       const resp = await fetch(
-        `http://www.omdbapi.com/?s=${title}&apiKey=6c3a2d45`
+        `${baseUrl}?` +
+          new URLSearchParams({
+            s: title,
+            apiKey,
+          })
       );
       const data = await resp.json();
       if (!resp.ok) throw new Error("Something went wrong during API call!");
@@ -63,9 +69,12 @@ export const getMovieData = (id, isFullPlot) => {
     dispatch(setLoading(true));
     const fetchData = async () => {
       const resp = await fetch(
-        `http://www.omdbapi.com/?i=${id}${
-          isFullPlot ? "&plot=full" : ""
-        }&apiKey=6c3a2d45`
+        `${baseUrl}?` +
+          new URLSearchParams({
+            i: id,
+            plot: isFullPlot ? "full" : null,
+            apiKey,
+          })
       );
       const data = await resp.json();
       if (!resp.ok) throw new Error("Something went wrong during API call!");

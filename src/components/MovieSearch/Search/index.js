@@ -18,7 +18,7 @@ function MovieSearch({ searchInputRef, onChangeHandler, searchCheckboxRef }) {
   return (
     <SearchContainer>
       <form onSubmit={onChangeHandler}>
-        <label htmlFor="searchTitle">Search Title</label>
+        <label htmlFor="searchTitle">Search</label>
         <input
           type="text"
           name="searchTitle"
@@ -29,7 +29,7 @@ function MovieSearch({ searchInputRef, onChangeHandler, searchCheckboxRef }) {
           }}
         />
         <Checkbox
-          label="Full plot"
+          label="Full"
           onCheckHandler={(event) => {
             dispatch(setIsFullPlot(event.target.checked));
           }}

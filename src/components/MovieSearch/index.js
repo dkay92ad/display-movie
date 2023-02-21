@@ -23,7 +23,7 @@ function MovieSearch() {
       dispatch(setSearchedTitle(title));
       dispatch(resetSearchedMovies());
       dispatch(getMovies(title, isFullPlot));
-      searchInputRef.current.value = "";
+      // searchInputRef.current.value = "";
     },
     [dispatch]
   );
