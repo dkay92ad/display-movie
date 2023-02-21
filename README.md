@@ -7,15 +7,6 @@ This is a responsive web app. It allows users to search for movies based on a ti
 o Search
 o Featured
 
-### `Screenshots`
-
-![Search Page on Desktop](public/screenshots/Search%20page_desktop.png)
-![Featured Page on Desktop](public/screenshots/Featured%20page_desktop.png)
-![Search Page on iPhone 12 Pro](<public/screenshots/Search%20page%20(iPhone%2012%20Pro).png>)
-![Featured Page on iPhone 12 Pro](<public/screenshots/Featured%20page(iPhone%2012%20Pro).png>)
-
-<img src="public/screenshots/Search%20page%20(iPhone%2012%20Pro).png"  width="390" height="844">
-
 ## Search Page
 
 Users can search for movies based on the title. This displays a list of movies, each displaying information about the corresponding movie:
@@ -34,6 +25,11 @@ The movie plot can be either set to display in full or short during search.
 
 For plots in full, there is a read more / read less functionality.
 
+### `Screenshots`
+
+![Search Page on Desktop](public/screenshots/Search%20page_desktop.png)
+<img src="public/screenshots/Search%20page%20(iPhone%2012%20Pro).png" alt="Search Page on iPhone 12 Pro" width="390" height="844">
+
 ## Featured Page
 
 Featured page displays two predefined movies with these information:
@@ -42,6 +38,11 @@ o Year
 o Awards
 o Poster
 o Plot (full)
+
+### `Screenshots`
+
+![Featured Page on Desktop](public/screenshots/Featured%20page_desktop.png)
+<img src="public/screenshots/Featured%20page(iPhone%2012%20Pro).png" alt="Featured Page on iPhone 12 Pro" width="390" height="844">
 
 ### Installation
 
