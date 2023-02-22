@@ -19,16 +19,17 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <AppContainer>
-          <AppHeader>
-            <NavLink to="/">Movie DB</NavLink>
-          </AppHeader>
-          <Navigation />
-          <ErrorBoundary fallback={<ErrorPage />}>
+          <ErrorBoundary>
+            <AppHeader>
+              <NavLink to={routes.HOME}>Movie DB</NavLink>
+            </AppHeader>
+            <Navigation />
             <Suspense fallback={<Loading />}>
               <Routes>
                 <Route path={routes.HOME} element={<MovieSearch />} />
                 <Route path={routes.SEARCH} element={<MovieSearch />} />
                 <Route path={routes.FEATURED} element={<MovieFeatured />} />
+                <Route path={routes.ERROR_PAGE} element={<ErrorPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

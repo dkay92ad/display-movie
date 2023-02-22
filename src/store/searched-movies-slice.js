@@ -15,6 +15,9 @@ export const searchedMoviesSlice = createSlice({
     addSearchedMovies: (state, action) => {
       state.movies.push(action.payload);
     },
+    clearMovies: (state, action) => {
+      state.movies = [];
+    },
     setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
@@ -28,7 +31,7 @@ export const searchedMoviesSlice = createSlice({
       state.error = action.payload;
     },
     resetSearchedMovies: (state, action) => {
-      state.movies = [];
+      return initialState;
     },
   },
 });
@@ -36,6 +39,7 @@ export const searchedMoviesSlice = createSlice({
 export const getMovies = (title, isFullPlot) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
+    dispatch(clearMovies());
     const fetchData = async () => {
       const resp = await fetch(
         `${baseUrl}?` +
@@ -52,9 +56,11 @@ export const getMovies = (title, isFullPlot) => {
     try {
       const { Search: movieTitles } = await fetchData();
       if (movieTitles.length) {
+        let promises = [];
         movieTitles.slice(0, 5).forEach(({ imdbID }) => {
-          dispatch(getMovieData(imdbID, isFullPlot));
+          promises.push(dispatch(getMovieData(imdbID, isFullPlot)));
         });
+        await Promise.allSettled(promises);
       }
       dispatch(setLoading(false));
     } catch (error) {
@@ -66,7 +72,6 @@ export const getMovies = (title, isFullPlot) => {
 
 export const getMovieData = (id, isFullPlot) => {
   return async (dispatch) => {
-    dispatch(setLoading(true));
     const fetchData = async () => {
       const resp = await fetch(
         `${baseUrl}?` +
@@ -84,10 +89,8 @@ export const getMovieData = (id, isFullPlot) => {
     try {
       const movie = await fetchData();
       dispatch(addSearchedMovies(movie));
-      dispatch(setLoading(false));
     } catch (error) {
       dispatch(setError(error.message));
-      dispatch(setLoading(false));
     }
   };
 };
@@ -95,6 +98,7 @@ export const getMovieData = (id, isFullPlot) => {
 // this is for dispatch
 export const {
   addSearchedMovies,
+  clearMovies,
   resetSearchedMovies,
   setLoading,
   setError,

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { apiKey, baseUrl } from "common/config";
+import { apiKey, baseUrl, predefinedMovies } from "common/config";
 
 const initialState = {
   movies: [],
@@ -19,12 +19,28 @@ export const featuredMoviesSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    resetFeaturedMovies: (state, action) => {
+      return initialState;
+    },
   },
 });
 
-export const getMovieData = (id, isFullPlot) => {
+export const getMovies = () => {
   return async (dispatch) => {
     dispatch(setLoading(true));
+    if (predefinedMovies.length) {
+      let promises = [];
+      predefinedMovies.forEach((imdbID) => {
+        promises.push(dispatch(getMovieData(imdbID, true)));
+      });
+      await Promise.allSettled(promises);
+    }
+    dispatch(setLoading(false));
+  };
+};
+
+export const getMovieData = (id, isFullPlot) => {
+  return async (dispatch) => {
     const fetchData = async () => {
       const resp = await fetch(
         `${baseUrl}?` +
@@ -42,16 +58,14 @@ export const getMovieData = (id, isFullPlot) => {
     try {
       const movie = await fetchData();
       dispatch(addFeaturedMovies(movie));
-      dispatch(setLoading(false));
     } catch (error) {
       dispatch(setError(error.message));
-      dispatch(setLoading(false));
     }
   };
 };
 
 // this is for dispatch
-export const { addSearchedMovies, addFeaturedMovies, setLoading, setError } =
+export const { addFeaturedMovies, setLoading, setError, resetFeaturedMovies } =
   featuredMoviesSlice.actions;
 
 // this is for configureStore

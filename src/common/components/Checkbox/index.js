@@ -1,20 +1,11 @@
+import React from "react";
 import PropTypes from "prop-types";
 
-const Checkbox = ({
-  label,
-  isDefaultChecked,
-  searchCheckboxRef,
-  onCheckHandler,
-}) => {
+const Checkbox = ({ label, isChecked, onCheckHandler }) => {
   return (
     <div className="checkbox-wrapper">
       <label>
-        <input
-          type="checkbox"
-          ref={searchCheckboxRef}
-          checked={isDefaultChecked}
-          onChange={onCheckHandler}
-        />
+        <input type="checkbox" checked={isChecked} onChange={onCheckHandler} />
         <span>{label}</span>
       </label>
     </div>
@@ -22,8 +13,7 @@ const Checkbox = ({
 };
 Checkbox.prototype = {
   label: PropTypes.string.isRequired,
-  isDefaultChecked: PropTypes.bool.isRequired,
-  searchCheckboxRef: PropTypes.object.isRequired,
+  isChecked: PropTypes.bool.isRequired,
   onCheckHandler: PropTypes.func.isRequired,
 };
-export default Checkbox;
+export default React.memo(Checkbox);

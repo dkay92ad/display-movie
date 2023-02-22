@@ -35,7 +35,7 @@ function MovieDisplay({
   const readMore = useCallback(
     (plot) => {
       return (
-        plot.length > 200 && (
+        plot?.length > 200 && (
           <button
             className="read-more"
             onClick={() => setIsReadMore((prevState) => !prevState)}
@@ -61,7 +61,7 @@ function MovieDisplay({
   const renderConditionalPlot = useCallback(
     (plot) => {
       let showString = plot;
-      if (!isReadMore && showString.length > 200) {
+      if (!isReadMore && showString?.length > 200) {
         showString = showString.slice(0, 200);
         return renderPlot(showString, plot);
       }

@@ -2,6 +2,7 @@ export const routes = {
   HOME: "/",
   SEARCH: "/search",
   FEATURED: "/featured",
+  ERROR_PAGE: "/error_page",
 };
 
 export const predefinedMovies = [

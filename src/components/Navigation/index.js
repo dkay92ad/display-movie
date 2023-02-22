@@ -4,15 +4,14 @@ import { routes } from "common/config";
 import { NavigationContainer } from "./styles";
 
 function Navigation() {
-  const location = useLocation();
-  const isSearch =
-    location.pathname === routes.HOME || location.pathname === routes.SEARCH;
+  const { pathname } = useLocation();
+  const isSearch = pathname === routes.HOME || pathname === routes.SEARCH;
 
   let activeClassName = "active-link";
   return (
     <NavigationContainer>
       <NavLink
-        to="/search"
+        to={routes.SEARCH}
         className={({ isActive }) =>
           isActive || isSearch ? activeClassName : undefined
         }
@@ -20,7 +19,7 @@ function Navigation() {
         Search
       </NavLink>
       <NavLink
-        to="/featured"
+        to={routes.FEATURED}
         className={({ isActive }) => (isActive ? activeClassName : undefined)}
       >
         Featured

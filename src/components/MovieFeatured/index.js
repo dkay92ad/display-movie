@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMovieData } from "../../store/featured-movies-slice";
-import { predefinedMovies } from "common/config";
+import { getMovies } from "store/featured-movies-slice";
 import ErrorPage from "common/components/ErrorPage";
 import { MovieFeaturedContainer } from "./styles";
 import MovieDisplay from "./../MovieDisplay";
@@ -18,10 +17,7 @@ function MovieFeatured() {
   useEffect(() => {
     if (isInitial) {
       isInitial = false;
-
-      predefinedMovies.forEach((imdbID) => {
-        dispatch(getMovieData(imdbID, true));
-      });
+      dispatch(getMovies());
     }
   }, [dispatch]);
 

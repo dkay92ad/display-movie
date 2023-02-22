@@ -25,7 +25,7 @@ The movie plot can be either set to display in full or short during search.
 
 For plots in full, there is a read more / read less functionality.
 
-### `Screenshots`
+### Screenshots
 
 ![Search Page on Desktop](public/screenshots/Search%20page_desktop.png)
 <img src="public/screenshots/Search%20page%20(iPhone%2012%20Pro).png" alt="Search Page on iPhone 12 Pro" width="390" height="844">

@@ -1,49 +1,61 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSearchedTitle,
   setIsFullPlot,
-} from "./../../../store/searched-movies-slice";
+  getMovies,
+} from "store/searched-movies-slice";
 import { SearchContainer } from "./styles";
 import Checkbox from "common/components/Checkbox";
 
-function MovieSearch({ searchInputRef, onChangeHandler, searchCheckboxRef }) {
+function MovieSearch() {
   const dispatch = useDispatch();
   const searchedTitle = useSelector(
     (state) => state.searchedMovies.searchedTitle
   );
 
   const isFullPlot = useSelector((state) => state.searchedMovies.isFullPlot);
+  const titleChangeHandler = useCallback(
+    (event) => {
+      dispatch(setSearchedTitle(event.target.value));
+    },
+    [dispatch]
+  );
+  const fullPlotChangeHandler = useCallback(
+    (event) => {
+      dispatch(setIsFullPlot(event.target.checked));
+    },
+    [dispatch]
+  );
+  const onChangeHandler = useCallback(
+    (event) => {
+      event.preventDefault();
+      if (!searchedTitle) return;
+      dispatch(getMovies(searchedTitle, isFullPlot));
+    },
+    [dispatch, isFullPlot, searchedTitle]
+  );
   return (
     <SearchContainer>
-      <form onSubmit={onChangeHandler}>
-        <label htmlFor="searchTitle">Search</label>
+      <form id="searchMovies" onSubmit={onChangeHandler}>
+        <Checkbox
+          label="Full Plot"
+          onCheckHandler={fullPlotChangeHandler}
+          isChecked={isFullPlot}
+        />
         <input
           type="text"
+          id="searchTitle"
           name="searchTitle"
           value={searchedTitle}
-          ref={searchInputRef}
-          onChange={(event) => {
-            dispatch(setSearchedTitle(event.target.value));
-          }}
+          onChange={titleChangeHandler}
         />
-        <Checkbox
-          label="Full"
-          onCheckHandler={(event) => {
-            dispatch(setIsFullPlot(event.target.checked));
-          }}
-          isDefaultChecked={isFullPlot}
-          searchCheckboxRef={searchCheckboxRef}
-        />
+        <button type="submit" form="searchMovies">
+          Search
+        </button>
       </form>
     </SearchContainer>
   );
 }
-
-MovieSearch.propTypes = {
-  searchInputRef: PropTypes.object.isRequired,
-  onChangeHandler: PropTypes.func.isRequired,
-};
 
 export default React.memo(MovieSearch);

@@ -13,7 +13,7 @@ export const SearchContainer = styled.div`
   color: ${(props) => props.theme.colors.white};
   form {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 90%;
     label {
       line-height: 2.5rem;
