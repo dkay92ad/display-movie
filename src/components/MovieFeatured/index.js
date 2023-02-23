@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovies } from "store/featured-movies-slice";
-import ErrorPage from "common/components/ErrorPage";
 import { MovieFeaturedContainer } from "./styles";
 import MovieDisplay from "./../MovieDisplay";
 import Loading from "common/components/Loading";
-
-let isInitial = true;
+import ErrorPage from "common/components/ErrorPage";
 
 function MovieFeatured() {
   const dispatch = useDispatch();
@@ -15,10 +13,7 @@ function MovieFeatured() {
   const serverError = useSelector((state) => state.featuredMovies.error);
 
   useEffect(() => {
-    if (isInitial) {
-      isInitial = false;
-      dispatch(getMovies());
-    }
+    dispatch(getMovies());
   }, [dispatch]);
 
   if (isLoading) return <Loading />;

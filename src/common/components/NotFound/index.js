@@ -13,9 +13,9 @@ const NotFound = () => {
         style={{ height: "75%", width: "100%" }}
       />
       <h2>Not Found</h2>
-      <NavLink to={routes.HOME}>
-        <button>Go back to home page</button>
-      </NavLink>
+      <button>
+        <NavLink to={routes.HOME}>Go back to home page</NavLink>
+      </button>
     </ContentContainer>
   );
 };

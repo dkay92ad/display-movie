@@ -1,12 +1,12 @@
 import Search from "./Search";
-import MovieTitles from "./MovieTitles";
+import Movies from "./Movies";
 import { MovieSearchContainer } from "./styles";
 
 function MovieSearch() {
   return (
     <MovieSearchContainer>
       <Search />
-      <MovieTitles />
+      <Movies />
     </MovieSearchContainer>
   );
 }

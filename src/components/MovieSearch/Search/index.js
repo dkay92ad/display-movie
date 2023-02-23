@@ -8,7 +8,7 @@ import {
 import { SearchContainer } from "./styles";
 import Checkbox from "common/components/Checkbox";
 
-function MovieSearch() {
+function Search() {
   const dispatch = useDispatch();
   const searchedTitle = useSelector(
     (state) => state.searchedMovies.searchedTitle
@@ -58,4 +58,4 @@ function MovieSearch() {
   );
 }
 
-export default React.memo(MovieSearch);
+export default React.memo(Search);

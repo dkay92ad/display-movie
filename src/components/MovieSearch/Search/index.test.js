@@ -1,17 +1,16 @@
 import { act } from "react-dom/test-utils";
-import { screen, waitFor } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import renderWithFeatures from "testing";
-import MovieSearch from "./index";
+import Search from "./index";
 
-describe("MovieSearch tests", () => {
+describe("Search tests", () => {
   const beforeEach = () => {
-    return renderWithFeatures(<MovieSearch />);
+    return renderWithFeatures(<Search />);
   };
 
   test("renders checkbox field", () => {
-    const props = {};
-    beforeEach(props);
+    beforeEach();
     const checkbox = screen.getByRole("checkbox", { name: "Full Plot" });
     expect(checkbox).toBeInTheDocument();
     expect(checkbox.checked).toEqual(true);
@@ -22,8 +21,7 @@ describe("MovieSearch tests", () => {
   });
 
   test("renders search input field", () => {
-    const props = {};
-    beforeEach(props);
+    beforeEach();
     const inputField = screen.getByRole("textbox");
 
     act(() => {
@@ -32,15 +30,12 @@ describe("MovieSearch tests", () => {
     expect(inputField).toHaveValue("Troy");
   });
 
-  test("renders search button click", async () => {
-    const props = {};
-    beforeEach(props);
+  test("renders search button click", () => {
+    beforeEach();
     const searchBtn = screen.getByText(/search/i);
     expect(searchBtn).toBeInTheDocument();
-    await act(async () => {
+    act(() => {
       userEvent.click(searchBtn);
     });
-    
-    screen.debug();
   });
 });

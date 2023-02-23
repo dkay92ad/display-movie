@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Navigate } from "react-router-dom";
-import { routes } from "common/config";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -19,7 +17,7 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return <Navigate to={routes.ERROR_PAGE} />;
+      return this.props.fallback;
     }
 
     return this.props.children;
@@ -27,6 +25,7 @@ class ErrorBoundary extends React.Component {
 }
 
 ErrorBoundary.propTypes = {
+  fallback: PropTypes.node.isRequired,
   children: PropTypes.node.isRequired,
 };
 
