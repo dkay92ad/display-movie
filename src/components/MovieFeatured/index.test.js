@@ -1,32 +1,40 @@
 import { act } from "react-dom/test-utils";
 import { screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import renderWithFeatures from "testing";
+import { mockedSearchData } from "testing/mocks/mock-data";
 import MovieFeatured from "./index";
 
 describe("MovieFeatured tests", () => {
-  let onCheckHandler = jest.fn();
-  const beforeEach = (props) => {
-    return renderWithFeatures(
-      <MovieFeatured onCheckHandler={onCheckHandler} {...props} />
-    );
+  const beforeEach = () => {
+    return renderWithFeatures(<MovieFeatured />);
   };
 
   test("renders MovieFeatured field", async () => {
-    const props = {
-      label: "Full Plot",
-      isChecked: true,
-    };
-    beforeEach(props);
-    screen.debug();
-    // const checkbox = screen.getByRole("checkbox", { name: "Full Plot" });
-    // expect(checkbox).toBeInTheDocument();
-    // expect(checkbox).toBeChecked();
-    // await act(async () => {
-    //   userEvent.click(checkbox);
-    // });
-    // await waitFor(() => expect(onCheckHandler).toHaveBeenCalled());
-    // expect(onCheckHandler).toHaveBeenCalledTimes(1);
-    // await waitFor(() => expect(checkbox.checked).toEqual(false));
+    await act(async () => {
+      beforeEach();
+    });
+    const Poster = await waitFor(async () =>
+      screen.findAllByAltText(/movie poster/i)
+    );
+    expect(Poster).toHaveLength(2);
+    const Title = await waitFor(async () =>
+      screen.findAllByText(mockedSearchData.Title)
+    );
+    expect(Title).toHaveLength(2);
+
+    const Year = await waitFor(async () =>
+      screen.findAllByText(mockedSearchData.Year)
+    );
+    expect(Year).toHaveLength(2);
+
+    const Awards = await waitFor(async () =>
+      screen.findAllByText(mockedSearchData.Awards)
+    );
+    expect(Awards).toHaveLength(2);
+
+    const Plot = await waitFor(async () =>
+      screen.findAllByText(mockedSearchData.Plot.slice(0, 200))
+    );
+    expect(Plot).toHaveLength(2);
   });
 });

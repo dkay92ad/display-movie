@@ -14,7 +14,6 @@ describe("MovieDisplay tests", () => {
       isFrom: "Search",
     };
     beforeEach(props);
-    screen.debug();
     const Poster = screen.getByAltText(/movie poster/i);
     expect(Poster).toBeInTheDocument();
     const Title = screen.getByText(
