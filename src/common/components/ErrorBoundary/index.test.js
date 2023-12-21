@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-render-in-setup */
 import { screen } from "@testing-library/react";
 import renderWithFeatures from "testing";
 import ErrorBoundary from "./index";

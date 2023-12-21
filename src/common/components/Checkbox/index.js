@@ -11,7 +11,7 @@ const Checkbox = ({ label, isChecked, onCheckHandler }) => {
     </div>
   );
 };
-Checkbox.prototype = {
+Checkbox.propTypes = {
   label: PropTypes.string.isRequired,
   isChecked: PropTypes.bool.isRequired,
   onCheckHandler: PropTypes.func.isRequired,

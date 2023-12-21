@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-render-in-setup */
 import { act } from "react-dom/test-utils";
 import { screen, waitFor } from "@testing-library/react";
 import renderWithFeatures from "testing";

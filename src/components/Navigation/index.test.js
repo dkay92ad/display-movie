@@ -1,3 +1,5 @@
+/* eslint-disable testing-library/no-unnecessary-act */
+/* eslint-disable testing-library/no-render-in-setup */
 import { act } from "react-dom/test-utils";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";

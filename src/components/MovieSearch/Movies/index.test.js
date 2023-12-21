@@ -1,6 +1,5 @@
-import { act } from "react-dom/test-utils";
-import { screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+/* eslint-disable testing-library/no-render-in-setup */
+import { screen } from "@testing-library/react";
 import renderWithFeatures from "testing";
 import Movies from "./index";
 
@@ -18,7 +17,6 @@ describe("Movies tests", () => {
       isChecked: true,
     };
     beforeEach(props);
-    screen.debug();
     // const MovieTitles = screen.getByRole("MovieTitles", { name: "Full Plot" });
     // expect(MovieTitles).toBeInTheDocument();
     // expect(MovieTitles).toBeChecked();

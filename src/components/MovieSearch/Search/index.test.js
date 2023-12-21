@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-render-in-setup */
 import { act } from "react-dom/test-utils";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -14,9 +15,8 @@ describe("Search tests", () => {
     const checkbox = screen.getByRole("checkbox", { name: "Full Plot" });
     expect(checkbox).toBeInTheDocument();
     expect(checkbox.checked).toEqual(true);
-    act(() => {
-      userEvent.click(checkbox);
-    });
+
+    userEvent.click(checkbox);
     expect(checkbox.checked).toEqual(false);
   });
 
@@ -24,9 +24,8 @@ describe("Search tests", () => {
     beforeEach();
     const inputField = screen.getByRole("textbox");
 
-    act(() => {
-      userEvent.type(inputField, "Troy");
-    });
+    userEvent.type(inputField, "Troy");
+
     expect(inputField).toHaveValue("Troy");
   });
 
@@ -34,8 +33,7 @@ describe("Search tests", () => {
     beforeEach();
     const searchBtn = screen.getByText(/search/i);
     expect(searchBtn).toBeInTheDocument();
-    act(() => {
-      userEvent.click(searchBtn);
-    });
+
+    userEvent.click(searchBtn);
   });
 });

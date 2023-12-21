@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-render-in-setup */
 import renderWithFeatures from "testing";
 import Loading from "./index";
 

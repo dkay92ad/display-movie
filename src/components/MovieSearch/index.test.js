@@ -1,5 +1,6 @@
+/* eslint-disable testing-library/no-render-in-setup */
 import { act } from "react-dom/test-utils";
-import { screen, waitFor } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import renderWithFeatures from "testing";
 import MovieSearch from "./index";
@@ -15,9 +16,9 @@ describe("MovieSearch tests", () => {
     const checkbox = screen.getByRole("checkbox", { name: "Full Plot" });
     expect(checkbox).toBeInTheDocument();
     expect(checkbox.checked).toEqual(true);
-    act(() => {
-      userEvent.click(checkbox);
-    });
+act(() => {
+    userEvent.click(checkbox);
+});
     expect(checkbox.checked).toEqual(false);
   });
 
@@ -26,9 +27,7 @@ describe("MovieSearch tests", () => {
     beforeEach(props);
     const inputField = screen.getByRole("textbox");
 
-    act(() => {
-      userEvent.type(inputField, "Troy");
-    });
+    userEvent.type(inputField, "Troy");
     expect(inputField).toHaveValue("Troy");
   });
 
@@ -37,10 +36,7 @@ describe("MovieSearch tests", () => {
     beforeEach(props);
     const searchBtn = screen.getByText(/search/i);
     expect(searchBtn).toBeInTheDocument();
-    await act(async () => {
-      userEvent.click(searchBtn);
-    });
-    
-    screen.debug();
+
+    userEvent.click(searchBtn);
   });
 });

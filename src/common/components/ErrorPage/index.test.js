@@ -1,5 +1,5 @@
-import { act } from "react-dom/test-utils";
-import { screen, waitFor } from "@testing-library/react";
+/* eslint-disable testing-library/no-render-in-setup */
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import renderWithFeatures from "testing";
 import ErrorPage from "./index";
@@ -17,7 +17,7 @@ describe("ErrorPage tests", () => {
     expect(button).toBeInTheDocument();
     const link = screen.getByRole("link", { name: "Go back to home page" });
     expect(link).toBeInTheDocument();
-    await act(async () => {userEvent.click(link)});
+    userEvent.click(link);
     expect(link.className).toEqual("active");
   });
 });
